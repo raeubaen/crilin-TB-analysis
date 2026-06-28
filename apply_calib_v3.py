@@ -1,3 +1,4 @@
+import sys
 import uproot
 import ROOT
 import pandas as pd
@@ -8,9 +9,10 @@ import numpy as np
 # ======================================================
 
 
-dummy = True
+dummy = False
 
-root_file = "../cat_386_100GeV_first26files.root" #../cat_386_100GeV_v3.0.root"
+root_file = sys.argv[1] #"../cat_386_100GeV_v3.0.root"
+energy = sys.argv[2]
 
 tree_name = "tree"
 
@@ -84,7 +86,7 @@ with uproot.open(root_file) as f:
 
         mask = (
             (arr["beamcatcher_peak"][:, 0] > -10) #was < 10
-            # & (peak[:, 223]*4 < 1400) & (peak[:, 224]*6 < 1400)
+            & (peak[:, 223]*4 < 1400) & (peak[:, 224]*6 < 1400)
             #& (np.abs(14 * arr["crilin_ix_centroid"]) < 2)
             #& (np.abs(14 * arr["crilin_iy_centroid"]) < 2)
         )
@@ -113,9 +115,9 @@ print(event_sum)
 h = ROOT.TH1D(
     "hEventSum",
     "Calibrated Event Sum;Calibrated Sum;Events",
-    10000,
+    15000,
     0,
-    100
+    150
 )
 
 weights = np.ones(event_sum.size, dtype=np.float64)
@@ -125,5 +127,5 @@ h.FillN(event_sum.size, event_sum.astype(np.float64), weights)
 c = ROOT.TCanvas("c", "Event Sum", 800, 600)
 h.Draw("HIST")
 
-c.SaveAs("event_sum.png")
-c.SaveAs(f"event_sum.root")
+h.SaveAs(f"histo_energy_sum_{energy}.root")
+c.SaveAs(f"canvas_energy_sum_{energy}.root")
