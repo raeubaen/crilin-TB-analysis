@@ -10,9 +10,7 @@ import numpy as np
 
 dummy = False
 
-
 root_file = "cat_386_100GeV_v3.0.root"
-
 
 tree_name = "tree"
 
@@ -21,9 +19,8 @@ tree_name = "tree"
 # Read calibration coefficients
 # ======================================================
 
-
 if not dummy:
-    df = pd.read_csv("/home/ruben/Downloads/sestini_data/intercalib/done/output.csv")
+    df = pd.read_csv("/home/ruben/Downloads/calibfile_fullstatistics.csv")
 
     nx = df["ix"].max() + 1
     ny = df["iy"].max() + 1
@@ -35,7 +32,7 @@ if not dummy:
         df["ix"].to_numpy(np.int32),
         df["iy"].to_numpy(np.int32),
         df["layer"].to_numpy(np.int32),
-    ] = 1/df["mpv"].to_numpy(np.float32)
+    ] = 32.7709/26.2086*42.0224/df["mpv"].to_numpy(np.float32)
 
 
 # ======================================================
@@ -90,6 +87,7 @@ with uproot.open(root_file) as f:
 
         mask = (
             (arr["beamcatcher_peak"][:, 0] > -10) #was < 10
+            # & (peak[:, 223]*4 < 1400) & (peak[:, 224]*6 < 1400)
             #& (np.abs(14 * arr["crilin_ix_centroid_layer_1"]) < 2)
             #& (np.abs(14 * arr["crilin_iy_centroid_layer_1"]) < 2)
         )
@@ -101,7 +99,7 @@ with uproot.open(root_file) as f:
         print("shape peak sum per chunk: ", event_sum.shape)
         event_sum_all.append(event_sum)
 
-event_sum = np.concatenate(event_sum_all)
+event_sum = np.concatenate(event_sum_all)/1e3
 
 coeffs_array = np.concatenate(coeffs)
 
@@ -118,9 +116,9 @@ print(event_sum)
 h = ROOT.TH1D(
     "hEventSum",
     "Calibrated Event Sum;Calibrated Sum;Events",
-    1500,
+    10000,
     0,
-    3000,
+    100
 )
 
 weights = np.ones(event_sum.size, dtype=np.float64)
