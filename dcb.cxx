@@ -39,5 +39,7 @@ void dcb(TH1 *h){
   f->SetParameters(2, 2, 2, 2, h->GetMean(), h->GetRMS(), h->Integral());
   f->SetParLimits(2, 1, 10);
   f->SetParLimits(2, 1, 10);
+  f->SetParNames("#alpha_{l}","#alpha_{r}","n_{l}","n_{r}","#mu","#sigma","N");
+
   h->Fit(f);
 }
