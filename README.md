@@ -8,7 +8,17 @@ Excel elog: https://drd6-crilin-logbook.cern.ch/elisa/display/14?logbook=CRILIN
 
 Ultima reco con calibrazione 1/MPV(MIP) e template fit linearizzato dentro: [https://github.com/raeubaen/crilin_reco_from_padme_daq/releases/tag/crilin-on-ferrari-v1.1-mip-calib-in_ALL_WORKING](https://github.com/raeubaen/crilin_reco_from_padme_daq/releases/tag/crilin-on-ferrari-v2-linearized_fitON)
 
-Run usati qui: https://rgargiul.web.cern.ch/crilin_hadded_runs_tb-h2-2026/, meno quello a 65 GeV
+Run usati qui: https://rgargiul.web.cern.ch/crilin_hadded_runs_tb-h2-2026/ (re-reco iniziale, filtro + picco), meno quello a 65 GeV
+
+Tabella run buoni per energia:
+386 100
+395 20
+401 34
+403 52
+404 74
+413 120
+435 10
+429 65
 
 MC:
 https://github.com/raeubaen/CrilinSim/releases/tag/MC-for_TB
