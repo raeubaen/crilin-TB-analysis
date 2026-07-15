@@ -6,7 +6,7 @@ Elog: https://drd6-crilin-logbook.cern.ch/elisa/display
 
 Excel elog: https://drd6-crilin-logbook.cern.ch/elisa/display/14?logbook=CRILIN
 
-Ultima reco con calibrazione 1/MPV(MIP): https://github.com/raeubaen/crilin_reco_from_padme_daq/releases/tag/crilin-on-ferrari-v1.1-mip-calib-in_ALL_WORKING
+Ultima reco con calibrazione 1/MPV(MIP) e template fit linearizzato dentro: [https://github.com/raeubaen/crilin_reco_from_padme_daq/releases/tag/crilin-on-ferrari-v1.1-mip-calib-in_ALL_WORKING](https://github.com/raeubaen/crilin_reco_from_padme_daq/releases/tag/crilin-on-ferrari-v2-linearized_fitON)
 
 Run usati qui: https://rgargiul.web.cern.ch/crilin_hadded_runs_tb-h2-2026/, meno quello a 65 GeV
 
