@@ -10,6 +10,13 @@ Ultima reco con calibrazione 1/MPV(MIP) e template fit linearizzato dentro: [htt
 
 Run usati qui: https://rgargiul.web.cern.ch/crilin_hadded_runs_tb-h2-2026/ (re-reco iniziale, filtro + picco), meno quello a 65 GeV
 
+File nuovi ricostruiti qui:
+/eos/experiment/muoncollider/data/crilin/h2-2026/re-reco_dqm_template
+
+Profili per correggere i canali vs. startCell:
+https://rgargiul.web.cern.ch/digi_corr_crilin_pedestal_profiles_checks/
+
+
 Tabella run buoni per energia:
 | Run | Energia |
 |-------:|-------:|
