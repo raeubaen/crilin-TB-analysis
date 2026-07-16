@@ -1,20 +1,26 @@
 import uproot
 import numpy as np
+import sys
 
+#argv1: input signal file
+#argv2: pedestal corrections
+#argv3: outdir for outputs
 
-corr_file = uproot.open("h_slices.root")
+corr_file = uproot.open(sys.argv[2])
+
+outdir = sys.argv[3]
 
 nchannels = 225
 
 corrections = []
 
 for ch in range(225):
-    p = corr_file[f"h_{ch}_1"]
+    p = corr_file[f"h_{ch}_pfx"]
     corrections.append((p.values(), p.axis().edges()))
 
 
 # Apri il file di input
-fin = uproot.open("cat_435_10GeV_new_template.root")
+fin = uproot.open(sys.argv[1])
 tree = fin["tree"]
 
 # Leggi tutti i branch
@@ -148,8 +154,8 @@ mean_odd.SetLineColor(ROOT.kRed)
 
 mean_odd.Draw("P SAME")
 
-c2.SaveAs("SumCorr_vs_StartCell_odd.pdf")
-c2.SaveAs("SumCorr_vs_StartCell_odd.root")
+c2.SaveAs(f"{outdir}/SumCorr_vs_StartCell_odd.pdf")
+c2.SaveAs(f"{outdir}/SumCorr_vs_StartCell_odd.root")
 
 # convert to numpy
 
@@ -185,5 +191,5 @@ arrays["SumCorrResidualCorrected"] = (
     arrays["SumCorr"] - residual
 )
 
-with uproot.recreate("data_corrected.root") as fout:
+with uproot.recreate(f"{outdir}/data_corrected.root") as fout:
     fout["tree"] = arrays
