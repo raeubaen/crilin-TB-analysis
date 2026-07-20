@@ -6,6 +6,8 @@ import sys
 #argv2: pedestal corrections
 #argv3: outdir for outputs
 
+energy = int(sys.argv[4])
+
 corr_file = uproot.open(sys.argv[2])
 
 outdir = sys.argv[3]
@@ -23,8 +25,15 @@ for ch in range(225):
 fin = uproot.open(sys.argv[1])
 tree = fin["tree"]
 
-# Leggi tutti i branch
-arrays = tree.arrays(library="np")
+# Leggi solo i branch necessari
+needed = [
+    "StartCell",
+    "crilin_lsfit_amp",
+    "crilin_one_over_gain_over_ADC_per_mV",
+    "crilin_one_over_mpv",
+]
+
+arrays = tree.arrays(needed, library="np")
 
 # ----------------------------------------------------
 # Calcola amp_corr (come nel codice precedente)
@@ -87,13 +96,13 @@ xmax_sc = 1000.
 h_even = ROOT.TH2F(
     "h_even", "",
     nbins_sc, xmin_sc, xmax_sc,
-    80, 180, 220
+    80, 180*energy/10, 220*energy/10
 )
 
 h_odd = ROOT.TH2F(
     "h_odd", "",
     nbins_sc, xmin_sc, xmax_sc,
-    80, 180, 220
+    80, 180*energy/10, 220*energy/10
 )
 
 entries = np.arange(len(startcell))
@@ -191,5 +200,5 @@ arrays["SumCorrResidualCorrected"] = (
     arrays["SumCorr"] - residual
 )
 
-with uproot.recreate(f"{outdir}/data_corrected.root") as fout:
+with uproot.recreate(f"{outdir}/data_corrected_{energy}.root") as fout:
     fout["tree"] = arrays
