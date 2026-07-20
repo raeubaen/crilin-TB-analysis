@@ -34,7 +34,7 @@ https://github.com/raeubaen/CrilinSim/releases/tag/MC-for_TB
 
 MC file: 
 /eos/home-r/rgargiul/www/electrons_g4_crilin/fixed99GeV_2.5mmsquared_30_100GeV_4mmAldesign/fixed99GeV_2.5mmsquared_30_100GeV_4mmAldesign.root
-
+File con muoni a 150 GeV nella stessa cartella
 
 
 Calibrazione MC
